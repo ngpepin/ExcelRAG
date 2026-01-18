@@ -1,0 +1,41 @@
+@startuml
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam defaultFontName Segoe UI
+skinparam defaultFontSize 14
+
+rectangle "Excel Workbook" as Excel {
+  [Sources Table]
+  [Chunk Table]
+  [Metadata Table]
+  [QA Checks]
+}
+
+rectangle "Excel-DNA Add-in" as AddIn {
+  [UDF Layer]
+  [Trigger Controller]
+  [Cache / Registry]
+}
+
+rectangle "Managed .NET Layer" as DotNet {
+  [Ingest & Parse]
+  [Normalize]
+  [Chunk]
+  [Metadata]
+  [Validate]
+}
+
+rectangle "Export" as Export {
+  [JSONL]
+  [Manifest]
+  [Provenance]
+}
+
+cloud "Vector Store" as Vector
+
+Excel -right-> AddIn : RAG.* UDFs
+AddIn -right-> DotNet
+DotNet -right-> Export
+Export -right-> Vector
+
+@enduml
