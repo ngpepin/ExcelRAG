@@ -189,6 +189,31 @@ Export Layer
 
 * * *
 
+Current Implementation Status (Scaffolding)
+-----------------------------------------
+
+The repo currently contains **preliminary scaffolding** aligned with the patterns in this document:
+
+Implemented:
+
+* Add-in entrypoint: `ExcelRAG/AddIn.cs` (`IExcelAddIn` lifecycle hooks)
+* Trigger normalization: `ExcelRAG/Infrastructure/TriggerKey.cs`
+* Caller identity: `ExcelRAG/Infrastructure/CallerKey.cs` (via `xlfCaller`)
+* Caller-scoped cache: `ExcelRAG/Infrastructure/CallerScopedCache.cs`
+* Observer publish hub: `ExcelRAG/Infrastructure/RagProgressHub.cs`
+* Domain scaffolding: `ExcelRAG/Domain/RagSource.cs`, `ExcelRAG/Domain/RagChunk.cs`
+* One service scaffold: `ExcelRAG/Services/RagChunker.cs` (simple sentence chunking)
+* Baseline UDFs: `ExcelRAG/Udfs/RagUdfs.cs`
+  * `RAG_SOURCE_ID` (identity; caller-scoped; trigger-aware)
+  * `RAG_CHUNK` (triggered work; async with `ExcelAsyncUtil.RunTask`; cached)
+  * `RAG_STATUS` (observer; push-based via `ExcelAsyncUtil.Observe`)
+
+Not yet implemented (still planned): `RAG.INGEST`, `RAG.METADATA`, validation/dedup, export, ribbon.
+
+See `ARCHITECTURE.md` for a concise summary of the current scaffolding and data/control flow.
+
+* * *
+
 7. Hard Rules (Do Not Deviate)
 ------------------------------
 
