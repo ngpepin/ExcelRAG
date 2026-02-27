@@ -7,3 +7,5 @@ bin/
 obj/
 **/bin/
 **/obj/
+ExcelRAG/.nuget
+ExcelML-copy
